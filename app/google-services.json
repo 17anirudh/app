@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1088464430905",
+    "project_id": "audit-e638b",
+    "storage_bucket": "audit-e638b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088464430905:android:73fcbd9adf1b99e7acaae8",
+        "android_client_info": {
+          "package_name": "com.example.audit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAV1wwPXZAqFYy4k6kBkM1NuzAisizRO-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

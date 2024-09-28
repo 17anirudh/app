@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Audit</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="desc">Seamless platform for entry and exit of vehicles</string>
+    <string name="mail">E-Mail</string>
+    <string name="first">New? Click here to register</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="occupation">Occupation</string>
+    <string name="dob">DOB</string>
+    <string name="dll">Driving License</string>
+    <string name="username">Username</string>
+    <string name="logout">Logout</string>
+    <string name="profile">Profile</string>
+    <string name="gButton">Gatekeeper</string>
+    <string name="tButton">Transporter</string>
+    <string name="as">Register As</string>
+    <string name="by">Organization</string>
+    <string name="time">Time (in Minutes)</string>
+    <string name="purpose">Purpose</string>
+    <string name="ph">Phone</string>
+    <string name="add">Address</string>
+    <string name="req">Sent Applications</string>
+    <string name="send">Send message</string>
+    <string name="mess">Create application</string>
+    <string name="gID">Gatekeeper id</string>
+    <string name="plate">Vehicle Plate Number</string>
+    <string name="select">Select</string>
+    <string name="courier">Courier</string>
+    <string name="delievery">Delievery</string>
+    <string name="ride">Ride</string>
+    <string name="religious">Religious</string>
+    <string name="service">Service</string>
+    <string name="business">Business</string>
+</resources>
