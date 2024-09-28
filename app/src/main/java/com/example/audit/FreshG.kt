@@ -1,6 +1,7 @@
 package com.example.audit
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageButton
@@ -45,6 +46,7 @@ class FreshG : AppCompatActivity() {
             firestore.collection("users").document(uid).get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     phone = document.getString("phone").toString()
+                    Toast.makeText(this, "Logged In $phone", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show()
                 }
@@ -74,10 +76,19 @@ class FreshG : AppCompatActivity() {
                         dataList.add(data)
                         Toast.makeText(this, "Total Messages: $counter", Toast.LENGTH_SHORT).show()
                     }
-                    linearG.removeAllViews()
                     for ((index, data) in dataList.withIndex()) {
-                        val cardView = LayoutInflater.from(this).inflate(R.layout.activity_fresh_g, null, false) as CardView
-                        val textView = cardView.findViewById<TextView>(R.id.textView)
+                        val cardView = CardView(this)
+                        cardView.radius = 12f
+                        cardView.cardElevation = 8f
+                        cardView.setBackgroundColor(Color.WHITE)
+                        val params1 = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        ).apply {
+                            setMargins(16, 16, 16, 16)
+                        }
+                        cardView.layoutParams = params1
+                        val textView = TextView(this)
 
                         val sb = StringBuilder()
                         sb.append(index + 1)
@@ -97,8 +108,8 @@ class FreshG : AppCompatActivity() {
                             setMargins(16, 16, 16, 16)
                         }
                         cardView.layoutParams = params
-
                         linearG.addView(cardView)
+                        Toast.makeText(this, "Added UI", Toast.LENGTH_SHORT).show()
                     }
                     Toast.makeText(this, "Total Messages: $counter", Toast.LENGTH_SHORT).show()
                 }

@@ -1,6 +1,7 @@
 package com.example.audit
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.ImageButton
@@ -47,7 +48,8 @@ class FreshT : AppCompatActivity() {
             val uid = user.uid
             firestore.collection("users").document(uid).get().addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
-                    dll = document.getString("phone").toString()
+                    dll = document.getString("dll").toString()
+                    Toast.makeText(this, "Logged In $dll", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "User data not found", Toast.LENGTH_SHORT).show()
                 }
@@ -62,7 +64,7 @@ class FreshT : AppCompatActivity() {
             finish()
         }
 
-        reload2.setOnClickListener  {
+        reload2.setOnClickListener {
             firestore.collection("messages").whereEqualTo("dll", dll).get().addOnSuccessListener {
                 if (!it.isEmpty) {
                     for (document in it.documents) {
@@ -75,12 +77,20 @@ class FreshT : AppCompatActivity() {
                         data["tPhone"] = document.getString("tPhone").toString()
                         dataList.add(data)
                         counter += 1
-                        Toast.makeText(this, "Total Messages: $counter", Toast.LENGTH_SHORT).show()
                     }
-                    linearT.removeAllViews()
                     for ((index, data) in dataList.withIndex()) {
-                        val cardView = LayoutInflater.from(this).inflate(R.layout.activity_fresh_t, null, false) as CardView
-                        val textView = cardView.findViewById<TextView>(R.id.textView)
+                        val cardView = CardView(this)
+                        cardView.radius = 12f
+                        cardView.cardElevation = 8f
+                        cardView.setBackgroundColor(Color.WHITE)
+                        val params1 = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        ).apply {
+                            setMargins(16, 16, 16, 16)
+                        }
+                        cardView.layoutParams = params1
+                        val textView = TextView(this)
 
                         val sb = StringBuilder()
                         sb.append(index + 1)
@@ -100,8 +110,8 @@ class FreshT : AppCompatActivity() {
                             setMargins(16, 16, 16, 16)
                         }
                         cardView.layoutParams = params
-
                         linearT.addView(cardView)
+                        Toast.makeText(this, "Added UI", Toast.LENGTH_SHORT).show()
                     }
                     Toast.makeText(this, "Total Messages: $counter", Toast.LENGTH_SHORT).show()
                 }
