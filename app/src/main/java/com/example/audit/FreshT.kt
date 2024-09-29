@@ -79,41 +79,45 @@ class FreshT : AppCompatActivity() {
                         counter += 1
                     }
                     for ((index, data) in dataList.withIndex()) {
-                        val cardView = CardView(this)
-                        cardView.radius = 12f
-                        cardView.cardElevation = 8f
-                        cardView.setBackgroundColor(Color.WHITE)
-                        val params1 = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT,
-                        ).apply {
-                            setMargins(16, 16, 16, 16)
+                        val cardView = CardView(this).apply {
+                            radius = 12f
+                            cardElevation = 8f
+                            setBackgroundColor(Color.WHITE) // White background for the card
+                            layoutParams = LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            ).apply {
+                                setMargins(16, 16, 16, 16)
+                            }
                         }
-                        cardView.layoutParams = params1
-                        val textView = TextView(this)
 
-                        val sb = StringBuilder()
-                        sb.append(index + 1)
-                        sb.append(". ")
-                        sb.append(data["name"]).append(" - ")
-                        sb.append(data["vehicleNumberPlate"]).append(" - ")
-                        sb.append(data["company"]).append(" - ")
-                        sb.append(data["time"]).append(" - ")
-                        sb.append(data["purpose"])
+                        val textView = TextView(this).apply {
+                            setTextColor(Color.BLACK) // Set the text color to black or any visible color
+                            textSize = 16f // Optional: Set text size if needed
+                            setPadding(16, 16, 16, 16) // Optional: Add padding to the TextView
+                        }
 
+                        val sb = StringBuilder().apply {
+                            append(index + 1)
+                            append(". ")
+                            append(data["name"]).append(" - ")
+                            append(data["vehicleNumberPlate"]).append(" - ")
+                            append(data["company"]).append(" - ")
+                            append(data["time"]).append(" - ")
+                            append(data["purpose"])
+                        }
                         textView.text = sb.toString()
 
-                        val params = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        ).apply {
-                            setMargins(16, 16, 16, 16)
-                        }
-                        cardView.layoutParams = params
+                        // Add the TextView to the CardView
+                        cardView.addView(textView)
+
+                        // Add the CardView to the LinearLayout
                         linearT.addView(cardView)
+
                         Toast.makeText(this, "Added UI", Toast.LENGTH_SHORT).show()
                     }
                     Toast.makeText(this, "Total Messages: $counter", Toast.LENGTH_SHORT).show()
+
                 }
                 else{
                     Toast.makeText(this, "No messages found", Toast.LENGTH_SHORT).show()

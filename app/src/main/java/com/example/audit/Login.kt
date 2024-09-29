@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +35,8 @@ class Login : AppCompatActivity() {
         val mail = findViewById<EditText>(R.id.loginEmail)
         val password = findViewById<EditText>(R.id.loginPassword)
         val mAuth = FirebaseAuth.getInstance()
+        val firestore = FirebaseFirestore.getInstance()
+        var role = ""
 
         button.setOnClickListener {
             val mailT = mail.text.toString()
@@ -46,9 +49,24 @@ class Login : AppCompatActivity() {
             mAuth.signInWithEmailAndPassword(mailT, passwordT).addOnCompleteListener{
                 if(it.isSuccessful){
                     Toast.makeText(this, "Logged In Successfully", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this, FreshT::class.java))
-                    finish()
-                }else{
+                    val user = mAuth.currentUser
+                    val uid = user!!.uid
+                    firestore.collection("users").document(uid).get().addOnSuccessListener { document ->
+                        if (document != null && document.exists()) {
+                            role = document.getString("role").toString()
+                            Toast.makeText(this, "Logged In $role", Toast.LENGTH_SHORT).show()
+                            if (role == "Gatekeeper") {
+                                startActivity(Intent(this, FreshG::class.java))
+                                finish()
+                            }
+                            else {
+                                startActivity(Intent(this, FreshT::class.java))
+                                finish()
+                            }
+                        }
+                    }
+                }
+                else{
                     Toast.makeText(this, "Error Occurred" + it.exception.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
