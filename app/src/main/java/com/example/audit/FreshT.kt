@@ -98,12 +98,18 @@ class FreshT : AppCompatActivity() {
                         }
 
                         val sb = StringBuilder().apply {
-                            append(index + 1)
-                            append(". ")
-                            append(data["name"]).append(" - ")
-                            append(data["vehicleNumberPlate"]).append(" - ")
-                            append(data["company"]).append(" - ")
-                            append(data["time"]).append(" - ")
+                            append("APPLICATION ")
+                            append(index + 1).append("\n")
+                            append("TRANSPORTER NAME: ")
+                            append(data["name"]).append("\n")
+                            append("VEHICLE NO: ")
+                            append(data["vehicleNumberPlate"]).append("\n")
+                            append("SENT BY: ")
+                            append(data["company"]).append("\n")
+                            append("FOR: ")
+                            append(data["time"])
+                            append(" minutes").append("\n")
+                            append("WHY: ")
                             append(data["purpose"])
                         }
                         textView.text = sb.toString()
