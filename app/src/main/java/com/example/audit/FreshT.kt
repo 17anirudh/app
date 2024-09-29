@@ -65,6 +65,8 @@ class FreshT : AppCompatActivity() {
         }
 
         reload2.setOnClickListener {
+            linearT.removeAllViews()
+            dataList.clear()
             firestore.collection("messages").whereEqualTo("dll", dll).get().addOnSuccessListener {
                 if (!it.isEmpty) {
                     for (document in it.documents) {

@@ -62,6 +62,8 @@ class FreshG : AppCompatActivity() {
 
 
         addBtn.setOnClickListener {
+            linearG.removeAllViews()
+            dataList.clear()
             firestore.collection("messages").whereEqualTo("gNumber", phone).get().addOnSuccessListener {
                 if (!it.isEmpty) {
                     for (document in it.documents) {

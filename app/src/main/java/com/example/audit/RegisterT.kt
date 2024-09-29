@@ -98,7 +98,6 @@ class RegisterT : AppCompatActivity() {
                        val user = hashMapOf(
                            "uid" to mAuth.currentUser!!.uid,
                            "username" to username.text.toString(),
-                           "password" to password,
                            "name" to name,
                            "occupation" to occupation,
                            "dob" to dob,
